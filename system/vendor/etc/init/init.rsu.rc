@@ -1,0 +1,29 @@
+on post-fs-data
+    # Setup for Trustonic
+    mkdir /data/misc/mcRegistry 0775 system system
+    mkdir /data/misc/mcRegistry/TbStorage 0775 system system
+    mkdir /persist/mobicore 0775 system system
+
+service trustonic-tbase /system/bin/tbaseLoader tbase
+    class core
+    user system
+    group system
+    oneshot
+
+service trustonic-tbase-vendor /system/vendor/bin/tbaseLoader tbase
+    class core
+    user system
+    group system
+    oneshot
+
+service trustonic-daemon /system/vendor/bin/mcDriverDaemon
+    class late_start
+    user system
+    group system
+    oneshot
+
+service tsdaemon /system/vendor/bin/tsdaemon
+    class late_start
+    user system
+    group system radio
+    oneshot

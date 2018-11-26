@@ -1,0 +1,15 @@
+on early-fs
+    exec_start mmi-carrier-sh
+
+on early-boot
+    exec_start post-mmi-carrier-sh
+
+service mmi-carrier-sh /vendor/bin/init.mmi.carrier.sh -i
+    user root
+    oneshot
+    disabled
+
+service post-mmi-carrier-sh /vendor/bin/init.mmi.carrier.sh -o
+    user root
+    oneshot
+    disabled
